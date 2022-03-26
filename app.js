@@ -6,7 +6,7 @@ const { config } = require("./config");
 async function connectDB() {
   try {
     await mongoose.connect(
-      `mongodb+srv://${config.dbUser}:${config.dbPassword}@pagos-tec.mih9c.mongodb.net/pagos-tec-db?retryWrites=true&w=majority`
+      `mongodb+srv://${config.dbUser}:${config.dbPassword}${config.dbHost}/${config.dbName}?retryWrites=true&w=majority`
     );
     console.log("Connected to DB");
   } catch (error) {
@@ -16,9 +16,5 @@ async function connectDB() {
 }
 
 connectDB();
-
-app.listen(config.port, () => {
-  console.log(`Server running at port ${config.port}`);
-});
 
 module.exports = app;

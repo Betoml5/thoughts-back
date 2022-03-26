@@ -1,4 +1,6 @@
 const app = require("./app");
-app.listen(2424, () => {
-    console.log("Server listenting at port 2424")
-})
+const { config } = require("./config");
+
+app.listen(config.port, () => {
+  console.log(`Server running at port ${config.port}`);
+});
