@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
+const { config } = require("./config");
 
 async function connectDB() {
   try {
@@ -9,13 +11,14 @@ async function connectDB() {
     console.log("Connected to DB");
   } catch (error) {
     console.log(error);
+    throw error;
   }
 }
 
 connectDB();
 
-app.listen(2424, () => {
-  console.log("server listenting at port 2424");
+app.listen(config.port, () => {
+  console.log(`Server running at port ${config.port}`);
 });
 
 module.exports = app;
