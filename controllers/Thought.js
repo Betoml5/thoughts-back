@@ -14,6 +14,7 @@ const controller = {
   findOne: async (request, response) => {
     try {
       const { id } = request.params;
+      if (!id) response.status(404).send({ message: "Missing information" });
       const thought = await Thought.findById(id);
       return response.status(200).send({ thought });
     } catch (error) {
@@ -43,8 +44,8 @@ const controller = {
     try {
       const { id } = request.params;
       if (!id) response.status(404).send({ message: "Missing id" });
-      const deletedTought = await Thought.findByIdAndDelete(id, { new: true });
-      return response.status(200).send({ deletedTought });
+      const deletedThought = await Thought.findByIdAndDelete(id, { new: true });
+      return response.status(200).send({ deletedThought });
     } catch (error) {
       return response.status(500).send({ error });
     }
