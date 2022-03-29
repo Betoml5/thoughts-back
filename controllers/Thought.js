@@ -1,4 +1,5 @@
 const Thought = require("../models/Thought");
+const { body } = require("express-validator");
 
 const controller = {
   create: async (request, response) => {
@@ -18,26 +19,27 @@ const controller = {
       const thought = await Thought.findById(id);
       return response.status(200).send({ thought });
     } catch (error) {
-      return response.status(500).send({ error })
+      return response.status(500).send({ error });
     }
   },
   find: async (request, response) => {
     try {
       const thoughts = await Thought.find({});
-      return response.status(200).send({ thoughts })
+      return response.status(200).send({ thoughts });
     } catch (error) {
-      return response.status(500).send({ error })
+      return response.status(500).send({ error });
     }
   },
   update: async (request, response) => {
     try {
       const { id } = request.params;
       const { thought } = request.body;
-      if (!id || !thought) response.status(404).send({ message: "Missing information" });
+      if (!id || !thought)
+        response.status(404).send({ message: "Missing information" });
       const updatedThought = await Thought.findByIdAndUpdate(id, thought);
       return response.status(200).send({ updatedThought });
     } catch (error) {
-      return response.status(500).send({ error })
+      return response.status(500).send({ error });
     }
   },
   delete: async (response, request) => {
