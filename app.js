@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 const { config } = require("./config");
+const cors = require("cors");
+
+const thoughtRoutes = require("./routes/Thought");
 
 async function connectDB() {
   try {
@@ -16,5 +19,9 @@ async function connectDB() {
 }
 
 connectDB();
+
+app.use(cors("*"));
+
+app.use("/api/thougths", thoughtRoutes);
 
 module.exports = app;
